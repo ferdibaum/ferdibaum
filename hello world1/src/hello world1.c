@@ -1,12 +1,6 @@
 
 #include <stdio.h>
 
-
-// test test test
-//more test more test
-//3. test
-test
-
 int main(void) {
 
 	setvbuf(stdout, NULL, _IONBF, 0);
