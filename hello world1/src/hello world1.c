@@ -13,9 +13,9 @@ int main(void) {
 	int ergeb = 0;
 	printf("Rechner: \n");
 	printf("Geben sie eine Zahl ein: \n");
-	scanf("%3d", &x);
+	scanf("%d", &x);
 	printf("Geben sie eine zweite Zahl ein: \n");
-	scanf("%3d", &y);
+	scanf("%d", &y);
 	printf("Geben sie ein Rechenzeichen ein: \n");
 	scanf(" %c", &zeichen);
 
