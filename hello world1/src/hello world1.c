@@ -1,10 +1,6 @@
 
 #include <stdio.h>
 
-//test
-
-//hallo ina was geht
-
 int main(void) {
 
 	setvbuf(stdout, NULL, _IONBF, 0);
