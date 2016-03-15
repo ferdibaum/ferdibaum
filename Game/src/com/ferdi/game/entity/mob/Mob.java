@@ -1,6 +1,11 @@
 package com.ferdi.game.entity.mob;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ferdi.game.entity.Entity;
+import com.ferdi.game.entity.projctile.PlayerProjectile;
+import com.ferdi.game.entity.projctile.Projectile;
 import com.ferdi.game.graphics.Sprite;
 import com.ferdi.game.level.tile.Tile;
 
@@ -9,6 +14,8 @@ public abstract class Mob extends Entity {
 	protected Sprite sprite;
 	protected int dir;
 	protected boolean moving = false;
+	
+	protected List<Projectile> shoots = new ArrayList<Projectile>();
 
 	public void move(int xa, int ya) {
 		if (xa != 0 && ya != 0) {
@@ -28,6 +35,13 @@ public abstract class Mob extends Entity {
 	}
 
 	public void update() {
+	}
+	
+	protected void shooting(int x, int y, double dir){
+		//dir = dir * ( 180 / Math.PI);
+		//System.out.println("Angle: " + dir);
+		PlayerProjectile p = new PlayerProjectile(x, y, dir);
+		shoots.add(p);
 	}
 
 	public void render() {

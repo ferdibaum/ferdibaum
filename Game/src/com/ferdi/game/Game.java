@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import com.ferdi.game.entity.mob.Player;
 import com.ferdi.game.graphics.Screen;
 import com.ferdi.game.input.Keyboard;
+import com.ferdi.game.input.Mouse;
 import com.ferdi.game.level.Level;
 import com.ferdi.game.level.SpawnLevel;
 import com.ferdi.game.level.tile.TileCoordinate;
@@ -21,9 +22,9 @@ import com.ferdi.game.level.tile.TileCoordinate;
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
-	public static int width = 500;
-	public static int height = width / 16 * 9;
-	public static int scale = 2;
+	private static int width = 500;
+	private static int height = width / 16 * 9;
+	private static int scale = 2;
 	public static String title = "FerdiGame";
 
 	private Thread thread;
@@ -51,11 +52,15 @@ public class Game extends Canvas implements Runnable {
 		player.init(level);
 		
 		this.addKeyListener(key);
+		
+		Mouse mouse = new Mouse();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
 	}
 
 	public synchronized void start() {
 		running = true;
-		thread = new Thread(this, "Display");
+		thread = new Thread	(this, "Display");
 		thread.start();
 	}
 
@@ -132,9 +137,20 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Verdana", 0, 50));
 
+//		if (Mouse.mouseB() == 1){
+//			g.drawLine(Mouse.mouseX(), Mouse.mouseY(), 500, (500 / 16 * 9));
+//		}
+		
 		g.dispose();
 
 		bs.show();
+	}
+	
+	public static int getWinWidth(){
+		return width * scale;
+	}
+	public static int getWinHeight(){
+		return height * scale;
 	}
 
 	public static void main(String[] args) {

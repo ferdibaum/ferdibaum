@@ -1,8 +1,10 @@
-package com.ferdi.game.entity.mob;
+ package com.ferdi.game.entity.mob;
 
+import com.ferdi.game.Game;
 import com.ferdi.game.graphics.Screen;
 import com.ferdi.game.graphics.Sprite;
 import com.ferdi.game.input.Keyboard;
+import com.ferdi.game.input.Mouse;
 
 public class Player extends Mob {
 
@@ -95,6 +97,8 @@ public class Player extends Mob {
 		if (input.down) ya++;
 		if (input.left) xa--;
 		if (input.right) xa++;
+		
+		updateShooting();
 
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);
@@ -102,6 +106,15 @@ public class Player extends Mob {
 		} else {
 			moving = false;
 		}
+	}
+
+	private void updateShooting() {
+		if(Mouse.mouseB() == 1){
+			double dx = Mouse.mouseX() - Game.getWinWidth() / 2;
+			double dy = Mouse.mouseY() - Game.getWinHeight() / 2;
+			double dir = Math.atan2(dy, dx);
+			shooting(x, y, dir);
+		}		
 	}
 
 	public void render(Screen screen) {
