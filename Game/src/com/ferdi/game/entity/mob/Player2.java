@@ -1,14 +1,13 @@
-
 package com.ferdi.game.entity.mob;
 
 import com.ferdi.game.Game;
-import com.ferdi.game.entity.projctile.PlayerProjectile2;
+import com.ferdi.game.entity.projctile.PlayerProjectile;
 import com.ferdi.game.graphics.Screen;
 import com.ferdi.game.graphics.Sprite;
 import com.ferdi.game.input.Keyboard;
 import com.ferdi.game.input.Mouse;
 
-public class Player extends Mob {
+public class Player2 extends Mob {
 
 	private static final int RATE = 15;
 	private static final int SPEED = 2;
@@ -19,17 +18,17 @@ public class Player extends Mob {
 	private boolean shooting = false;
 	public String name;
 
-	public Player(int x, int y, Keyboard input, String name) {
+	public Player2(int x, int y, Keyboard input, String name) {
 		this.x = x;
 		this.y = y;
 		this.input = input;
 		this.name = name;
 
 		rateOfFire = RATE;
-
-		sprite = Sprite.playerDown0;
-		dir = 2;
 		speed = SPEED;
+
+		sprite = Sprite.player2Down0;
+		dir = 2;
 		life = 100;
 	}
 
@@ -38,10 +37,10 @@ public class Player extends Mob {
 		if (anim < 7500) anim++;
 		else
 			anim = 0;
-		if (input.up) ya--;
-		if (input.down) ya++;
-		if (input.left) xa--;
-		if (input.right) xa++;
+		if (input.w) ya--;
+		if (input.s) ya++;
+		if (input.a) xa--;
+		if (input.d) xa++;
 
 		updateShooting();
 		clear();
@@ -54,7 +53,7 @@ public class Player extends Mob {
 		}
 		if (shooting) speed = 1;
 		else
-			speed = SPEED;
+			speed = 2;
 	}
 
 	private void clear() {
@@ -66,7 +65,7 @@ public class Player extends Mob {
 
 	private void updateShooting() {
 		rateOfFire--;
-		if (Mouse.mouseB() == 1) {
+		if (Mouse.mouseB() == 2) {
 			shooting = true;
 			if (rateOfFire <= 0) {
 				double dx = Mouse.mouseX() - Game.getWinWidth() / 2;
@@ -74,7 +73,7 @@ public class Player extends Mob {
 				double dir = Math.atan2(dy, dx);
 				shooting(x, y, dir);
 			}
-		} else if (input.enter) {
+		} else if (input.space) {
 			shooting = true;
 			if (rateOfFire <= 0) {
 				double dir = 0;
@@ -92,15 +91,15 @@ public class Player extends Mob {
 		}
 
 		for (int i = 0; i < shoots.size(); i++) {
-			if (shoots.get(i).getX() < Game.player2.x + 20 && shoots.get(i).getX() > Game.player2.x - 20 && shoots.get(i).getY() < Game.player2.y + 20 && shoots.get(i).getY() > Game.player2.y - 20) {
-				Game.player2.life -= shoots.get(i).getDmg();
+			if (shoots.get(i).getX() < Game.player.x + 20 && shoots.get(i).getX() > Game.player.x - 20 && shoots.get(i).getY() < Game.player.y + 20 && shoots.get(i).getY() > Game.player.y - 20) {
+				Game.player.life -= shoots.get(i).getDmg();
 				shoots.get(i).remove();
 			}
 		}
 	}
 
 	protected void shooting(int x, int y, double dir) {
-		PlayerProjectile2 p = new PlayerProjectile2(x - Sprite.projectile.SIZE / 2, y - Sprite.projectile.SIZE / 2, dir);
+		PlayerProjectile p = new PlayerProjectile(x - Sprite.projectile.SIZE / 2, y - Sprite.projectile.SIZE / 2, dir);
 		shoots.add(p);
 		rateOfFire = RATE;
 	}
@@ -108,43 +107,43 @@ public class Player extends Mob {
 	public void render(Screen screen) {
 
 		if (dir == 0) {
-			sprite = Sprite.playerUp0;
+			sprite = Sprite.player2Up0;
 			if (moving) {
 				if (anim % 20 > 10) {
-					sprite = Sprite.playerUp1;
+					sprite = Sprite.player2Up1;
 				} else {
-					sprite = Sprite.playerUp2;
+					sprite = Sprite.player2Up2;
 				}
 			}
 
 		}
 		if (dir == 1) {
-			sprite = Sprite.playerRight0;
+			sprite = Sprite.player2Right0;
 			if (moving) {
 				if (anim % 20 > 10) {
-					sprite = Sprite.playerRight1;
+					sprite = Sprite.player2Right1;
 				} else {
-					sprite = Sprite.playerRight2;
+					sprite = Sprite.player2Right2;
 				}
 			}
 		}
 		if (dir == 2) {
-			sprite = Sprite.playerDown0;
+			sprite = Sprite.player2Down0;
 			if (moving) {
 				if (anim % 20 > 10) {
-					sprite = Sprite.playerDown1;
+					sprite = Sprite.player2Down1;
 				} else {
-					sprite = Sprite.playerDown2;
+					sprite = Sprite.player2Down2;
 				}
 			}
 		}
 		if (dir == 3) {
-			sprite = Sprite.playerLeft0;
+			sprite = Sprite.player2Left0;
 			if (moving) {
 				if (anim % 20 > 10) {
-					sprite = Sprite.playerLeft1;
+					sprite = Sprite.player2Left1;
 				} else {
-					sprite = Sprite.playerLeft2;
+					sprite = Sprite.player2Left2;
 				}
 			}
 		}

@@ -11,7 +11,9 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.ferdi.game.entity.mob.Enemy;
 import com.ferdi.game.entity.mob.Player;
+import com.ferdi.game.entity.mob.Player2;
 import com.ferdi.game.graphics.Screen;
 import com.ferdi.game.input.Keyboard;
 import com.ferdi.game.input.Mouse;
@@ -22,17 +24,26 @@ import com.ferdi.game.level.tile.TileCoordinate;
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
+	public static String title = "FerdiGame";
+
 	private static int width = 500;
 	private static int height = width / 16 * 9;
 	private static int scale = 2;
-	public static String title = "FerdiGame";
 
 	private Thread thread;
 	private JFrame frame;
-	private Keyboard key;
 	private Level level;
-	private Player player;
+	private static final Keyboard key = new Keyboard();;
+
+	private static final TileCoordinate playerSpawn = new TileCoordinate(14, 9);
+	public static Player player = new Player(playerSpawn.x + 180, playerSpawn.y, key, "Ferdi");
+	public static Player2 player2 = new Player2(playerSpawn.x - 100, playerSpawn.y, key, "Fidi");
+	private Enemy enemy1;
+	private Enemy enemy2;
+
 	private boolean running = false;
+	private boolean gameing = false;
+	private String end = "";
 
 	private Screen screen;
 
@@ -45,14 +56,17 @@ public class Game extends Canvas implements Runnable {
 
 		screen = new Screen(width, height);
 		frame = new JFrame();
-		key = new Keyboard();
 		level = new SpawnLevel("/textures/level1.png", "/textures/level2.png", "/textures/level3.png");
-		TileCoordinate  playerSpawn = new TileCoordinate(14, 12);
-		player = new Player(playerSpawn.x, playerSpawn.y, key);
 		player.init(level);
-		
-		this.addKeyListener(key);
-		
+		player2.init(level);
+
+		enemy1 = new Enemy(playerSpawn.x - 150, playerSpawn.y - 90, 1);
+		enemy2 = new Enemy(playerSpawn.x + 240, playerSpawn.y - 90, 2);
+		level.add(enemy1);
+		level.add(enemy2);
+
+		addKeyListener(key);
+
 		Mouse mouse = new Mouse();
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
@@ -60,7 +74,7 @@ public class Game extends Canvas implements Runnable {
 
 	public synchronized void start() {
 		running = true;
-		thread = new Thread	(this, "Display");
+		thread = new Thread(this, "Display");
 		thread.start();
 	}
 
@@ -111,7 +125,30 @@ public class Game extends Canvas implements Runnable {
 
 	public void update() {
 		key.update();
-		player.update();
+		if (key.back) {
+			gameing = true;
+			player.reset(playerSpawn.x + 180, playerSpawn.y, 100);
+			player2.reset(playerSpawn.x - 100, playerSpawn.y, 100);
+			enemy1.reset(playerSpawn.x - 150, playerSpawn.y - 90, 100);
+			enemy2.reset(playerSpawn.x + 240, playerSpawn.y - 90, 100);
+			end = "";
+		}
+		if (gameing) {
+			player.update();
+			player2.update();
+			level.update();
+
+			if (player.getLife() <= 0) {
+				end = player2.name + " hat gewonnen !!";
+				render();
+				gameing = false;
+			}
+			if (player2.getLife() <= 0) {
+				end = player.name + " hat gewonnen !!";
+				render();
+				gameing = false;
+			}
+		}
 	}
 
 	public void render() {
@@ -122,9 +159,10 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		screen.clear();
-		int xScroll = player.x -screen.width /2;
-		int yScroll = player.y -screen.height /2;
+		int xScroll = screen.width / 2;//int xScroll = player2.x - screen.width / 2;
+		int yScroll = screen.height / 2 + 10; //int yScroll = player2.y  - screen.height / 2 +10;
 		level.render(xScroll, yScroll, screen);
+		player2.render(screen);
 		player.render(screen);
 
 		for (int i = 0; i < pixels.length; i++) {
@@ -137,19 +175,31 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Verdana", 0, 50));
 
-//		if (Mouse.mouseB() == 1){
-//			g.drawLine(Mouse.mouseX(), Mouse.mouseY(), 500, (500 / 16 * 9));
-//		}
-		
+		//		if (Mouse.mouseB() == 1){
+		//			g.drawLine(Mouse.mouseX(), Mouse.mouseY(), 500, (500 / 16 * 9));
+		//		}
+
+		g.setColor(Color.RED);
+		g.fillRect(40, 20, player2.getLife() * 2, 40);
+		g.fillRect(750, 20, player.getLife() * 2, 40);
+		g.setColor(Color.BLACK);
+		g.drawRect(40, 20, 100 * 2, 40);
+		g.drawRect(750, 20, 100 * 2, 40);
+		g.setFont(new Font("Verdana", 0, 25));
+		g.drawString(player2.name, 50, 48);
+		g.drawString(player.name, 760, 48);
+		g.setFont(new Font("Verdana", 0, 70));
+		g.drawString(end, 100, 200);
 		g.dispose();
 
 		bs.show();
 	}
-	
-	public static int getWinWidth(){
+
+	public static int getWinWidth() {
 		return width * scale;
 	}
-	public static int getWinHeight(){
+
+	public static int getWinHeight() {
 		return height * scale;
 	}
 

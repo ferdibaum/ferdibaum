@@ -24,8 +24,8 @@ public class SpawnLevel extends Level {
 		}
 		try {
 			BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(path2));
-			int w  = image.getWidth();
-			int h  = image.getHeight();
+			int w = image.getWidth();
+			int h = image.getHeight();
 			pixels1 = new int[w * h];
 			image.getRGB(0, 0, w, h, pixels1, 0, w);
 		} catch (IOException e) {
@@ -34,8 +34,8 @@ public class SpawnLevel extends Level {
 		}
 		try {
 			BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(path3));
-			int w  = image.getWidth();
-			int h  = image.getHeight();
+			int w = image.getWidth();
+			int h = image.getHeight();
 			pixels2 = new int[w * h];
 			image.getRGB(0, 0, w, h, pixels2, 0, w);
 		} catch (IOException e) {
@@ -43,7 +43,6 @@ public class SpawnLevel extends Level {
 			System.out.println("Exception! Could not load level file!");
 		}
 	}
-
 
 	protected void genarateLevel() {
 	}

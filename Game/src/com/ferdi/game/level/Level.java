@@ -1,5 +1,9 @@
 package com.ferdi.game.level;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ferdi.game.entity.Entity;
 import com.ferdi.game.graphics.Screen;
 import com.ferdi.game.level.tile.Tile;
 
@@ -10,6 +14,8 @@ public class Level {
 	protected int[] pixels0;
 	protected int[] pixels1;
 	protected int[] pixels2;
+
+	private List<Entity> entities = new ArrayList<Entity>();
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -31,7 +37,9 @@ public class Level {
 	}
 
 	public void update() {
-
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).update();
+		}
 	}
 
 	public void render(int xScroll, int yScroll, Screen screen) {
@@ -48,6 +56,13 @@ public class Level {
 				getTile2(x, y).render(x, y, screen);
 			}
 		}
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).render(screen);
+		}
+	}
+
+	public void add(Entity e) {
+		entities.add(e);
 	}
 
 	public Tile getTile0(int x, int y) {
@@ -68,7 +83,7 @@ public class Level {
 		if (pixels1[x + y * width] == Tile.tree_col20) return Tile.tree[2][0];
 		if (pixels1[x + y * width] == Tile.tree_col21) return Tile.tree[2][1];
 		if (pixels1[x + y * width] == Tile.tree_col22) return Tile.tree[2][2];
-		
+
 		if (pixels1[x + y * width] == Tile.water_col00) return Tile.water[0][0];
 		if (pixels1[x + y * width] == Tile.water_col01) return Tile.water[0][1];
 		if (pixels1[x + y * width] == Tile.water_col02) return Tile.water[0][2];
@@ -78,12 +93,12 @@ public class Level {
 		if (pixels1[x + y * width] == Tile.water_col20) return Tile.water[2][0];
 		if (pixels1[x + y * width] == Tile.water_col21) return Tile.water[2][1];
 		if (pixels1[x + y * width] == Tile.water_col22) return Tile.water[2][2];
-		
+
 		if (pixels1[x + y * width] == Tile.rock_col00) return Tile.rock[0][0];
 		if (pixels1[x + y * width] == Tile.rock_col01) return Tile.rock[0][1];
 		if (pixels1[x + y * width] == Tile.rock_col10) return Tile.rock[1][0];
 		if (pixels1[x + y * width] == Tile.rock_col11) return Tile.rock[1][1];
-		
+
 		if (pixels1[x + y * width] == Tile.blanksolid_col) return Tile.blankSolidTile;
 		else
 			return Tile.blankTile;

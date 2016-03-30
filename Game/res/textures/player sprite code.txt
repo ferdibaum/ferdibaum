@@ -1,0 +1,93 @@
+		private Sprite[] right = new Sprite[6];
+		private Sprite[] up = new Sprite[6];
+		private Sprite[] left = new Sprite[6];
+		private Sprite[] down = new Sprite[6];
+
+		right[0] = Sprite.playerXRight0;
+		right[1] = Sprite.playerXRight1;
+		right[2] = Sprite.playerXRight2;
+		right[3] = Sprite.playerXRight3;
+		right[4] = Sprite.playerXRight4;
+		right[5] = Sprite.playerXRight5;
+
+		left[0] = Sprite.playerXLeft0;
+		left[1] = Sprite.playerXLeft1;
+		left[2] = Sprite.playerXLeft2;
+		left[3] = Sprite.playerXLeft3;
+		left[4] = Sprite.playerXLeft4;
+		left[5] = Sprite.playerXLeft5;
+
+		up[0] = Sprite.playerXUp0;
+		up[1] = Sprite.playerXUp1;
+		up[2] = Sprite.playerXUp2;
+		up[3] = Sprite.playerXUp3;
+		up[4] = Sprite.playerXUp4;
+		up[5] = Sprite.playerXUp5;
+
+		down[0] = Sprite.playerXDown0;
+		down[1] = Sprite.playerXDown1;
+		down[2] = Sprite.playerXDown2;
+		down[3] = Sprite.playerXDown3;
+		down[4] = Sprite.playerXDown4;
+		down[5] = Sprite.playerXDown5;
+
+public static Sprite linkUP0 = new Sprite(16, 0, 2, SpriteSheet.tiles);
+	public static Sprite linkUP1 = new Sprite(16, 1, 2, SpriteSheet.tiles);
+	public static Sprite linkUP2 = new Sprite(16, 2, 2, SpriteSheet.tiles);
+
+	public static Sprite linkRIGHT0 = new Sprite(16, 9, 2, SpriteSheet.tiles);
+	public static Sprite linkRIGHT1 = new Sprite(16, 10, 2, SpriteSheet.tiles);
+	public static Sprite linkRIGHT2 = new Sprite(16, 11, 2, SpriteSheet.tiles);
+
+	public static Sprite linkLEFT0 = new Sprite(16, 6, 2, SpriteSheet.tiles);
+	public static Sprite linkLEFT1 = new Sprite(16, 7, 2, SpriteSheet.tiles);
+	public static Sprite linkLEFT2 = new Sprite(16, 8, 2, SpriteSheet.tiles);
+
+	public static Sprite linkDOWN0 = new Sprite(16, 3, 2, SpriteSheet.tiles);
+	public static Sprite linkDOWN1 = new Sprite(16, 4, 2, SpriteSheet.tiles);
+	public static Sprite linkDOWN2 = new Sprite(16, 5, 2, SpriteSheet.tiles);
+	
+	public static Sprite linkUP01 = new Sprite(16, 0, 3, SpriteSheet.tiles);
+	public static Sprite linkUP11 = new Sprite(16, 1, 3, SpriteSheet.tiles);
+	public static Sprite linkUP21 = new Sprite(16, 2, 3, SpriteSheet.tiles);
+
+	public static Sprite linkRIGHT01 = new Sprite(16, 9, 3, SpriteSheet.tiles);
+	public static Sprite linkRIGHT11 = new Sprite(16, 10, 3, SpriteSheet.tiles);
+	public static Sprite linkRIGHT21 = new Sprite(16, 11, 3, SpriteSheet.tiles);
+
+	public static Sprite linkLEFT01 = new Sprite(16, 6, 3, SpriteSheet.tiles);
+	public static Sprite linkLEFT11 = new Sprite(16, 7, 3, SpriteSheet.tiles);
+	public static Sprite linkLEFT21 = new Sprite(16, 8, 3, SpriteSheet.tiles);
+
+	public static Sprite linkDOWN01 = new Sprite(16, 3, 3, SpriteSheet.tiles);
+	public static Sprite linkDOWN11 = new Sprite(16, 4, 3, SpriteSheet.tiles);
+	public static Sprite linkDOWN21 = new Sprite(16, 5, 3, SpriteSheet.tiles);
+	
+	public static Sprite playerXRight0 = new Sprite(32, 0, 2, SpriteSheet.tiles);
+	public static Sprite playerXRight1 = new Sprite(32, 1, 2, SpriteSheet.tiles);
+	public static Sprite playerXRight2 = new Sprite(32, 2, 2, SpriteSheet.tiles);
+	public static Sprite playerXRight3 = new Sprite(32, 3, 2, SpriteSheet.tiles);
+	public static Sprite playerXRight4 = new Sprite(32, 4, 2, SpriteSheet.tiles);
+	public static Sprite playerXRight5 = new Sprite(32, 5, 2, SpriteSheet.tiles);
+	
+	public static Sprite playerXLeft0 = new Sprite(32, 0, 3, SpriteSheet.tiles);
+	public static Sprite playerXLeft1 = new Sprite(32, 1, 3, SpriteSheet.tiles);
+	public static Sprite playerXLeft2 = new Sprite(32, 2, 3, SpriteSheet.tiles);
+	public static Sprite playerXLeft3 = new Sprite(32, 3, 3, SpriteSheet.tiles);
+	public static Sprite playerXLeft4 = new Sprite(32, 4, 3, SpriteSheet.tiles);
+	public static Sprite playerXLeft5 = new Sprite(32, 5, 3, SpriteSheet.tiles);
+	
+	public static Sprite playerXUp0 = new Sprite(32, 0,5, SpriteSheet.tiles);
+	public static Sprite playerXUp1 = new Sprite(32, 1,5, SpriteSheet.tiles);
+	public static Sprite playerXUp2 = new Sprite(32, 2,5, SpriteSheet.tiles);
+	public static Sprite playerXUp3 = new Sprite(32, 3,5, SpriteSheet.tiles);
+	public static Sprite playerXUp4 = new Sprite(32, 4,5, SpriteSheet.tiles);
+	public static Sprite playerXUp5 = new Sprite(32, 5,5, SpriteSheet.tiles);
+	
+	public static Sprite playerXDown0 = new Sprite(32, 0, 4, SpriteSheet.tiles);
+	public static Sprite playerXDown1 = new Sprite(32, 1, 4, SpriteSheet.tiles);
+	public static Sprite playerXDown2 = new Sprite(32, 2, 4, SpriteSheet.tiles);
+	public static Sprite playerXDown3 = new Sprite(32, 3, 4, SpriteSheet.tiles);
+	public static Sprite playerXDown4 = new Sprite(32, 4, 4, SpriteSheet.tiles);
+	public static Sprite playerXDown5 = new Sprite(32, 5, 4, SpriteSheet.tiles);
+	

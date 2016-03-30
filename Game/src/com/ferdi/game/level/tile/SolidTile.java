@@ -9,11 +9,11 @@ public class SolidTile extends Tile {
 		super(sprite);
 	}
 
-	public void render(int x, int y, Screen screen){
-		screen.renderTile(x << 5, y << 5, this);
+	public void render(int x, int y, Screen screen) {
+		screen.renderTile(x << 5, y << 5, sprite);
 	}
-	
-	public boolean solid(){
+
+	public boolean solid() {
 		return true;
 	}
 }
