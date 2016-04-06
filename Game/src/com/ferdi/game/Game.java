@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private JFrame frame;
 	private Level level;
-	private static final Keyboard key = new Keyboard();;
+	private static final Keyboard key = new Keyboard();
 
 	private static final TileCoordinate playerSpawn = new TileCoordinate(14, 9);
 	public static Player player = new Player(playerSpawn.x + 180, playerSpawn.y, key, "Ferdi");
@@ -202,18 +202,9 @@ public class Game extends Canvas implements Runnable {
 	public static int getWinHeight() {
 		return height * scale;
 	}
-
-	public static void main(String[] args) {
-		Game game = new Game();
-		game.frame.setResizable(false);
-		game.frame.setTitle(Game.title);
-		game.frame.add(game);
-		game.frame.pack();
-		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.frame.setLocationRelativeTo(null);
-		game.frame.setVisible(true);
-
-		game.start();
+	
+	public JFrame getFrame(){
+		return frame;
 	}
 
 }
